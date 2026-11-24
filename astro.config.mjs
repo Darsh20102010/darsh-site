@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 // Change `site` to your real domain once you have one (e.g. https://darsh.dev)
 export default defineConfig({
-  site: 'https://darsh-site.pages.dev',
+  site: 'https://darsh-velagapudi.com',
   integrations: [sitemap()],
   trailingSlash: 'ignore',
 });
