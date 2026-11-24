@@ -1,0 +1,42 @@
+---
+import site from '../data/site.json';
+const quick = [
+  ['/', 'Home'], ['/about', 'About'], ['/why-ai', 'Why AI'], ['/projects', 'Projects'], ['/research', 'Research'],
+  ['/experience', 'Experience'], ['/blog', 'Writing'], ['/achievements', 'Achievements'], ['/contact', 'Contact'],
+];
+const ext = [['Resume', site.links.resume], ['LinkedIn', site.links.linkedin], ['GitHub', site.links.github]].filter(([, h]) => h);
+---
+<footer class="ft">
+  <div class="container ft-grid">
+    <div>
+      <div class="ft-name">{site.name}</div>
+      <p class="mono muted">{site.footerTagline}</p>
+      <p class="muted small">{site.location}</p>
+    </div>
+    <nav aria-label="Quick links">
+      <span class="label">Quick links</span>
+      <ul>{quick.map(([h, l]) => <li><a href={h}>{l}</a></li>)}</ul>
+    </nav>
+    <nav aria-label="External">
+      <span class="label">Elsewhere</span>
+      <ul>
+        {ext.length ? ext.map(([l, h]) => <li><a href={h} target="_blank" rel="noopener noreferrer">{l} ↗</a></li>)
+          : ['Resume', 'LinkedIn', 'GitHub'].map((l) => <li class="muted">{l} — soon</li>)}
+      </ul>
+    </nav>
+  </div>
+  <div class="container copy mono">© {new Date().getFullYear()} {site.name}. All rights reserved.</div>
+</footer>
+<style>
+  .ft { border-top: 1px solid var(--line); padding: 4rem 0 2rem; margin-top: 2rem; background: linear-gradient(transparent, var(--bg-2)); }
+  .ft-grid { display: grid; grid-template-columns: 1.4fr 1.4fr 1fr; gap: 2.5rem; }
+  .ft-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; margin-bottom: .5rem; }
+  .ft p.mono { font-size: .78rem; }
+  .small { font-size: .9rem; }
+  ul { list-style: none; padding: 0; margin: 1rem 0 0; columns: 2; gap: 1rem; }
+  nav[aria-label='External'] ul { columns: 1; }
+  li { margin-bottom: .45rem; font-size: .93rem; color: var(--text-2); }
+  li a:hover { color: var(--cyan); }
+  .copy { font-size: .74rem; color: var(--text-3); margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  @media (max-width: 760px) { .ft-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,25 @@
+---
+import StatusBadge from './StatusBadge.astro';
+import Placeholder from './Placeholder.astro';
+interface Props { href?: string; title: string; subtitle: string; status: string; statusKind?: string; role: string; description: string; tags: string[]; image?: string; }
+const { href, title, subtitle, status, statusKind = 'project', role, description, tags, image } = Astro.props;
+const Tag = href ? 'a' : 'article';
+---
+<Tag href={href} class="card lift pc reveal">
+  {image && <Placeholder label={`${title} — image`} src={image} ratio="16 / 9" />}
+  <div class="pc-body">
+    <div class="top"><StatusBadge kind={statusKind} text={status} /><span class="mono muted role">{role}</span></div>
+    <h3>{title}</h3>
+    <p class="sub">{subtitle}</p>
+    <p>{description}</p>
+    <ul class="tags">{tags.map((t) => <li class="tag">{t}</li>)}</ul>
+  </div>
+</Tag>
+<style>
+  .pc { padding: .75rem; display: flex; flex-direction: column; }
+  .pc-body { padding: 1.25rem 1rem 1rem; }
+  .top { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: .9rem; }
+  .role { font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; }
+  h3 { font-size: 1.5rem; margin-bottom: .2rem; }
+  .sub { color: var(--cyan); font-size: .95rem; margin-bottom: .8rem; }
+</style>

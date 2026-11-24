@@ -1,0 +1,17 @@
+---
+interface Props { title: string; result: string; category?: string; text?: string; image?: string; }
+const { title, result, category, text } = Astro.props;
+---
+<article class="card lift ac reveal">
+  {category && <span class="mono muted cat">{category}</span>}
+  <div class="result">{result}</div>
+  <h3>{title}</h3>
+  {text && <p>{text}</p>}
+</article>
+<style>
+  .ac { display: flex; flex-direction: column; gap: .3rem; min-height: 200px; }
+  .cat { font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: auto; padding-bottom: 1.4rem; }
+  .result { font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; letter-spacing: -0.02em; color: var(--cyan); line-height: 1.15; }
+  h3 { font-family: var(--font-body); font-size: 1rem; font-weight: 500; color: var(--text); margin: 0; }
+  p { font-size: .9rem; margin-top: .4rem; }
+</style>

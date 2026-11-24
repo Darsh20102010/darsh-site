@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import SkillCard from '../components/SkillCard.astro';
+import MunCard from '../components/MunCard.astro';
+import Placeholder from '../components/Placeholder.astro';
+import ex from '../data/experience.json';
+const sections = [['#work', 'Work'], ['#learning', 'Learning'], ['#leadership', 'Leadership'], ['#policy', 'Policy & MUN'], ['#impact', 'Impact']];
+---
+<Layout title="Experience" description="Darsh's experience: Best Brains web internship, Harvard CS50, Head Boy, basketball, Model UN and community work.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="label reveal">Experience</span>
+      <h1 class="reveal">Where the learning met the real world.</h1>
+      <nav class="jump reveal reveal-d1" aria-label="On this page">{sections.map(([h, l]) => <a href={h} class="tag">{l}</a>)}</nav>
+    </div>
+  </section>
+
+  <section class="section" id="work" style="padding-top:0">
+    <div class="container">
+      <SectionHeader label="Professional experience" title="Building a real product" />
+      <div class="split">
+        <ExperienceCard org={ex.internship.org} role={ex.internship.role} period={ex.internship.period || ex.internship.location} description={ex.internship.description} tags={ex.internship.tags} />
+        <div class="reveal reveal-d1">
+          <span class="label">What I learned</span>
+          <p class="lead" style="margin-top:1rem">{ex.internship.learned}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="learning">
+    <div class="container">
+      <SectionHeader label="My learning journey" title={ex.cs50.title} lead={ex.cs50.description} />
+      <div class="grid skills">{ex.cs50.skills.map((s) => <SkillCard name={s.name} kind={s.kind} />)}</div>
+      <div class="card reveal changed">
+        <span class="label">What CS50 changed for me</span>
+        <p class="lead" style="margin-top:1rem">{ex.cs50.changed}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="leadership">
+    <div class="container">
+      <SectionHeader label="Leadership" title="Leading with responsibility." />
+      <div class="grid grid-2">
+        <article class="card reveal big">
+          <span class="mono muted">{ex.headBoy.year}</span>
+          <h3>{ex.headBoy.title}</h3>
+          <p class="accent">{ex.headBoy.org}</p>
+          <ul class="list">{ex.headBoy.highlights.map((h) => <li>{h}</li>)}</ul>
+          <blockquote>“{ex.headBoy.reflection}”</blockquote>
+        </article>
+        <article class="card reveal reveal-d1 big">
+          <span class="mono muted">{ex.basketball.sport}</span>
+          <h3>{ex.basketball.title}</h3>
+          <ul class="tags" style="margin:1rem 0 1.6rem">{ex.basketball.show.map((s) => <li class="tag">{s}</li>)}</ul>
+          <span class="label">What sport taught me</span>
+          <dl class="taught">{ex.basketball.taught.map((t) => <><dt>{t.k}</dt><dd>{t.v}</dd></>)}</dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="policy">
+    <div class="container">
+      <SectionHeader label="MUN & debate" title="Technology, Policy &amp; Global Affairs" lead={ex.policyIntro} />
+      <div class="grid grid-4">{ex.mun.map((m) => <MunCard {...m} />)}</div>
+    </div>
+  </section>
+
+  <section class="section" id="impact">
+    <div class="container">
+      <SectionHeader label="Social impact" title="Technology beyond the screen" lead="Some of the most important things I've learned had nothing to do with code." />
+      <div class="grid grid-2">
+        {ex.impact.map((it, i) => (
+          <article class={`card reveal big reveal-d${i}`}>
+            <span class="mono muted">{it.role}</span>
+            <h3>{it.title}</h3>
+            <ul class="tags" style="margin:1rem 0 1.4rem">{it.highlights.map((h) => <li class="tag">{h}</li>)}</ul>
+            <span class="label">Reflection</span>
+            {it.reflection ? <p style="margin-top:.8rem">{it.reflection}</p> : <span class="todo" style="margin-top:.8rem">Edit: add your reflection in /admin → Experience.</span>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+<style>
+  .jump { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2rem; }
+  .jump a:hover { border-color: var(--cyan); color: var(--text); }
+  .skills { grid-template-columns: repeat(7, 1fr); gap: .75rem; }
+  @media (max-width: 960px) { .skills { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 560px) { .skills { grid-template-columns: repeat(2, 1fr); } }
+  .changed { margin-top: 2rem; }
+  .big { padding: 2rem; }
+  .big > .mono { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; }
+  .big h3 { font-size: 1.8rem; margin: .8rem 0 .2rem; }
+  .list { padding-left: 1.1rem; margin: 1.2rem 0; color: var(--text-2); }
+  .list li { margin-bottom: .3rem; }
+  blockquote { margin: 1.5rem 0 0; padding-left: 1rem; border-left: 2px solid var(--cyan); color: var(--text); font-size: 1.05rem; }
+  .taught { display: grid; grid-template-columns: auto 1fr; gap: .55rem 1.2rem; margin: 1rem 0 0; }
+  dt { font-weight: 600; font-size: .95rem; }
+  dd { margin: 0; color: var(--text-2); font-size: .93rem; }
+  @media (max-width: 520px) { .taught { grid-template-columns: 1fr; gap: .1rem; } dd { margin-bottom: .6rem; } }
+</style>

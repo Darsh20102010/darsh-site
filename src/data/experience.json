@@ -1,0 +1,171 @@
+{
+  "internship": {
+    "org": "Best Brains",
+    "role": "Web Intern",
+    "period": "",
+    "description": "Contributed to the web-based learning platform of Best Brains, a US-based education company headquartered in Arlington Heights, Illinois, that offers Math, English, Abacus and Coding programs for children aged 3 to 14 through learning centres and online classes. Assisted with front-end development and supported improvements to the online tools used in tutoring and running classes.",
+    "tags": [
+      "Web Development",
+      "Front-End Development",
+      "Product Thinking",
+      "Teamwork",
+      "EdTech"
+    ],
+    "learned": "This was my first time inside a live ed-tech platform: seeing how it is designed, built and maintained, and working within an organisational tech team. Code I wrote wasn’t a practice exercise anymore. Tutors and students would use it in their classes, and that changed how I thought about everything from testing to small details in the interface.",
+    "location": "Arlington Heights, Illinois (US-based)"
+  },
+  "cs50": {
+    "title": "Harvard CS50 (edX)",
+    "description": "Completed Harvard's CS50 online course end-to-end, working through problem sets in C, Python, SQL and JavaScript and building hands-on projects involving algorithms, data structures and web development.",
+    "skills": [
+      {
+        "name": "C",
+        "kind": "Language"
+      },
+      {
+        "name": "Python",
+        "kind": "Language"
+      },
+      {
+        "name": "SQL",
+        "kind": "Language"
+      },
+      {
+        "name": "JavaScript",
+        "kind": "Language"
+      },
+      {
+        "name": "Algorithms",
+        "kind": "Concept"
+      },
+      {
+        "name": "Data Structures",
+        "kind": "Concept"
+      },
+      {
+        "name": "Web Development",
+        "kind": "Practice"
+      }
+    ],
+    "changed": "CS50 taught me structured problem-solving: break a big problem into small pieces, solve one, test it, move on. That way of working shaped how I approach complex problems, including later projects like Kisan AI."
+  },
+  "headBoy": {
+    "title": "Head Boy",
+    "org": "Shamrock International School",
+    "year": "2024–25",
+    "highlights": [
+      "Led the school in all events, activities and tours",
+      "Represented Shamrock International School at external activities",
+      "Coordinated with students and staff to manage school events",
+      "Guided fellow students with responsibility and empathy"
+    ],
+    "reflection": "Leadership taught me to lead with responsibility, confidence and empathy."
+  },
+  "basketball": {
+    "title": "House Captain",
+    "sport": "Basketball",
+    "show": [
+      "Leadership",
+      "Strategy",
+      "Teamwork",
+      "Execution",
+      "Sporting Spirit",
+      "Finale Winner"
+    ],
+    "taught": [
+      {
+        "k": "Decision Making",
+        "v": "You choose in a second, then live with it."
+      },
+      {
+        "k": "Team Coordination",
+        "v": "Five people, one plan, constant communication."
+      },
+      {
+        "k": "Pressure",
+        "v": "Staying clear-headed when the clock is running."
+      },
+      {
+        "k": "Strategy",
+        "v": "Reading the other side and adapting the plan."
+      },
+      {
+        "k": "Resilience",
+        "v": "Losing a game, learning from it, coming back."
+      }
+    ]
+  },
+  "policyIntro": "AI doesn’t only raise technical questions. It raises political, economic and ethical ones. Across four committees at VIVA MUN, IIMUN and Harvard MUN India, I debated AI and employment, AI-based weapons and space debris, arguing about technology as a diplomat, not a developer.",
+  "mun": [
+    {
+      "conference": "VIVA",
+      "country": "USA",
+      "committee": "UNSC",
+      "agenda": [
+        "Global conflict and diplomacy"
+      ],
+      "awards": [
+        "Special Mention"
+      ]
+    },
+    {
+      "conference": "IIMUN",
+      "country": "Guinea",
+      "committee": "World Economic Forum",
+      "agenda": [
+        "AI and employment"
+      ],
+      "awards": []
+    },
+    {
+      "conference": "VIVA",
+      "country": "India",
+      "committee": "DISEC",
+      "agenda": [
+        "Nuclear weapons and AI-based weapons",
+        "Bloc leader",
+        "Resolution passed with 100% majority"
+      ],
+      "awards": [
+        "Best Delegate"
+      ]
+    },
+    {
+      "conference": "Harvard MUN India",
+      "country": "Iraq",
+      "committee": "UNOOSA",
+      "agenda": [
+        "Space debris",
+        "AI in space",
+        "International collaboration"
+      ],
+      "awards": []
+    }
+  ],
+  "impact": [
+    {
+      "title": "Gorumudda Mid-Day-Meal Scheme",
+      "role": "Speaker, Andhra Pradesh Government Panel",
+      "highlights": [
+        "School nutrition",
+        "Public policy",
+        "Government implementation",
+        "Community welfare",
+        "Communication with officials"
+      ],
+      "reflection": ""
+    },
+    {
+      "title": "Chethuva Foundation",
+      "role": "Volunteer",
+      "highlights": [
+        "School for autistic children",
+        "Taught subjects",
+        "Donated furniture",
+        "Learning empathy and patience",
+        "Inclusive communication"
+      ],
+      "reflection": ""
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+---
+interface Props { href: string; title: string; date?: Date; number?: number; category: string; description: string; image?: string; }
+const { href, title, date, number, category, description } = Astro.props;
+const d = date ? date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : number ? `No. ${String(number).padStart(2, '0')}` : '';
+---
+<a href={href} class="card lift bc reveal" data-category={category}>
+  <div class="meta mono"><span class="accent">{category}</span><span class="muted">{d}</span></div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <span class="more mono">Read more <span class="arrow">→</span></span>
+</a>
+<style>
+  .bc { display: flex; flex-direction: column; height: 100%; }
+  .meta { display: flex; justify-content: space-between; gap: 1rem; font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1.2rem; }
+  h3 { font-size: 1.25rem; line-height: 1.25; }
+  p { font-size: .96rem; flex: 1; }
+  .more { font-size: .78rem; color: var(--text); margin-top: .5rem; }
+  .arrow { display: inline-block; transition: transform .25s var(--ease); }
+  .bc:hover .arrow { transform: translateX(4px); }
+</style>

@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import AchievementCard from '../components/AchievementCard.astro';
+import Pipeline from '../components/Pipeline.astro';
+import Placeholder from '../components/Placeholder.astro';
+import ach from '../data/achievements.json';
+import inno from '../data/innovation.json';
+---
+<Layout title="Achievements" description="Recognition: IJAIO Gold (India Rank 1), SEAMO Bronze, IIT Kharagpur Young Innovators Programme, INAIO, MUN awards, Head Boy and basketball.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="label reveal">Achievements</span>
+      <h1 class="reveal">Recognition</h1>
+      <p class="lead reveal reveal-d1">Milestones from AI and maths olympiads, innovation, diplomacy, leadership and sport.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container grid grid-3">
+      {ach.recognition.map((a) => <AchievementCard title={a.title} result={a.result} category={a.category} />)}
+    </div>
+  </section>
+
+  <section class="section" id="competitions">
+    <div class="container">
+      <SectionHeader label="Competitions" title="Olympiads" lead={ach.competitionsIntro} />
+      <div class="grid grid-3">
+        {ach.competitions.map((c, i) => (
+          <article class={`card reveal stage reveal-d${i}`}>
+            <span class="mono muted">{c.detail}</span>
+            <div class="big">{c.result}</div>
+            <h3>{c.title}</h3>
+            <p>{c.description}</p>
+            <ul class="tags">{c.highlights.map((h) => <li class="tag">{h}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader label="Innovation" title={`${inno.title}: <span class="accent">${inno.result}</span>`} />
+      <Pipeline steps={inno.rounds} />
+      <p style="margin-top:2rem"><a class="btn" href="/projects#innovation">See the project <span class="arrow">→</span></a></p>
+    </div>
+  </section>
+
+  {ach.certificates.some((x) => x.src) && <section class="section">
+    <div class="container">
+      <SectionHeader label="Certificates" title="Certificates" />
+      <div class="grid grid-3">{ach.certificates.filter((x) => x.src).map((x) => <Placeholder label={x.label} src={x.src} ratio="4 / 3" />)}</div>
+    </div>
+  </section>}
+</Layout>
+<style>
+  .stage { padding: 2.25rem; }
+  .stage > .mono { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; }
+  .big { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 600; color: var(--cyan); margin: .6rem 0 1.6rem; line-height: 1.1; }
+  .stage h3 { font-family: var(--font-body); font-size: 1.05rem; font-weight: 600; }
+  .stage .tags { margin-top: 1rem; }
+  .bar { height: 4px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+  .bar span { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+  .steps { display: flex; justify-content: space-between; font-size: .72rem; margin-top: .7rem; color: var(--text-3); }
+  .steps .on { color: var(--text); }
+</style>

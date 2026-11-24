@@ -1,0 +1,118 @@
+{
+  "greeting": "Hi, I'm Darsh.",
+  "headline": "I teach machines to see, to forget, and to help.",
+  "subheading": "AI & Computer Science Student | Builder | Researcher",
+  "intro": "Between a dataset and a farmer's field there's a gap where a model stops being an idea and has to become useful. That gap is where I like to work. I'm a student from Vijayawada who built Kisan AI to bring crop prices, weather and crop advice to farmers in their own language, wrote a published paper on how trained models can unlearn what they were taught, and am now researching how robots can find their way through places that were never designed for them.",
+  "focus": [
+    "AI",
+    "Machine Learning",
+    "Computer Vision",
+    "Robotics",
+    "Research"
+  ],
+  "pipelineTitle": "How I work, written as a model would see it",
+  "pipeline": [
+    {
+      "k": "Input",
+      "v": "A real problem worth solving."
+    },
+    {
+      "k": "Data",
+      "v": "Research: reading, questioning, testing assumptions."
+    },
+    {
+      "k": "Model",
+      "v": "Build: code, systems, prototypes."
+    },
+    {
+      "k": "Prediction",
+      "v": "Experiment: does it actually work?"
+    },
+    {
+      "k": "Decision",
+      "v": "Explain: write it down so others can use it."
+    },
+    {
+      "k": "Impact",
+      "v": "Apply: put it in front of real people."
+    }
+  ],
+  "storyTitle": "One curiosity, ten verbs.",
+  "storyLead": "I don't just learn about technology. I build it, research it, explain it and try to put it to work, and I care about the people on the other side of it.",
+  "story": [
+    {
+      "verb": "Building",
+      "items": [
+        "Kisan AI"
+      ],
+      "href": "/projects/kisan-ai"
+    },
+    {
+      "verb": "Researching",
+      "items": [
+        "Machine Unlearning",
+        "Robot Navigation"
+      ],
+      "href": "/research"
+    },
+    {
+      "verb": "Innovating",
+      "items": [
+        "IIT Kharagpur Young Innovators Programme"
+      ],
+      "href": "/projects#innovation"
+    },
+    {
+      "verb": "Learning",
+      "items": [
+        "Harvard CS50"
+      ],
+      "href": "/experience#learning"
+    },
+    {
+      "verb": "Writing",
+      "items": [
+        "14BLOGS: 14+ AI / CS blogs"
+      ],
+      "href": "/blog"
+    },
+    {
+      "verb": "Competing",
+      "items": [
+        "IJAIO Gold (India Rank 1)",
+        "INAIO Stage 2 (ACM India)",
+        "SEAMO Bronze"
+      ],
+      "href": "/achievements#competitions"
+    },
+    {
+      "verb": "Working",
+      "items": [
+        "Best Brains web internship"
+      ],
+      "href": "/experience"
+    },
+    {
+      "verb": "Leading",
+      "items": [
+        "Head Boy"
+      ],
+      "href": "/experience#leadership"
+    },
+    {
+      "verb": "Communicating",
+      "items": [
+        "MUN & debate"
+      ],
+      "href": "/experience#policy"
+    },
+    {
+      "verb": "Serving",
+      "items": [
+        "Community & policy initiatives"
+      ],
+      "href": "/experience#impact"
+    }
+  ],
+  "closing": "Someone who doesn't just learn about technology, but builds, researches, explains and applies it."
+}

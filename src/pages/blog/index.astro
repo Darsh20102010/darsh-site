@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getPosts } from '../../lib/content';
+import { CATEGORIES } from '../../content.config';
+const posts = await getPosts();
+const counts = Object.fromEntries(CATEGORIES.map((c) => [c, posts.filter((p) => p.data.category === c).length]));
+---
+<Layout title="Writing" description="Technical blog by Darsh: explaining AI, machine learning, computer vision, robotics and computer science.">
+  <section class="page-hero">
+    <div class="container split">
+      <div>
+        <span class="label reveal">Writing</span>
+        <h1 class="reveal">Explaining what I learn.</h1>
+        <p class="lead reveal reveal-d1">I write about AI and Computer Science to understand technical ideas more deeply and make them easier for others to understand.</p>
+      </div>
+      <div class="card reveal reveal-d2 stat">
+        <div class="n">14+</div>
+        <div class="t">14BLOGS · Technical blogs</div>
+        <p>A self-driven technical blogging initiative on Artificial Intelligence and Computer Science, sustained from Grade 9 through Grade 12. Each post breaks an advanced idea into a clear, structured explanation.</p>
+        <ul class="tags">{['AI / ML', 'Computer Science', 'Algorithms', 'Technology', 'Real-World Applications'].map((t) => <li class="tag">{t}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="filters" role="toolbar" aria-label="Filter by category" data-filters>
+        <button class="chip active" data-f="all" aria-pressed="true">All <span>{posts.length}</span></button>
+        {CATEGORIES.map((c) => <button class="chip" data-f={c} aria-pressed="false">{c} <span>{counts[c]}</span></button>)}
+      </div>
+      <div class="grid grid-3" data-list>
+        {posts.map((p) => <BlogCard href={`/blog/${p.id}`} title={p.data.title} date={p.data.date} number={p.data.number} category={p.data.category} description={p.data.description} />)}
+      </div>
+      <p class="empty muted mono" data-empty hidden>No posts in this category yet.</p>
+    </div>
+  </section>
+</Layout>
+<script>
+  function initFilters() {
+    const bar = document.querySelector('[data-filters]');
+    if (!bar) return;
+    const cards = document.querySelectorAll<HTMLElement>('[data-list] [data-category]');
+    const empty = document.querySelector<HTMLElement>('[data-empty]');
+    bar.querySelectorAll<HTMLButtonElement>('button').forEach((b) => {
+      b.onclick = () => {
+        const f = b.dataset.f;
+        bar.querySelectorAll('button').forEach((x) => { x.classList.toggle('active', x === b); x.setAttribute('aria-pressed', String(x === b)); });
+        let shown = 0;
+        cards.forEach((c) => { const ok = f === 'all' || c.dataset.category === f; c.style.display = ok ? '' : 'none'; if (ok) { shown++; c.classList.add('in'); } });
+        if (empty) empty.hidden = shown > 0;
+      };
+    });
+  }
+  document.addEventListener('astro:page-load', initFilters);
+</script>
+<style>
+  .stat { padding: 2rem; }
+  .stat .n { font-family: var(--font-display); font-size: 4.5rem; font-weight: 700; line-height: 1; letter-spacing: -0.04em; color: var(--cyan); }
+  .stat .t { font-family: var(--font-mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .14em; margin: .6rem 0 1rem; }
+  .filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
+  .chip { font-family: var(--font-mono); font-size: .76rem; padding: .5rem .9rem; min-height: 38px; border-radius: 999px; border: 1px solid var(--line-strong); background: transparent; color: var(--text-2); cursor: pointer; transition: all .2s; }
+  .chip span { color: var(--text-3); margin-left: .25rem; }
+  .chip:hover { color: var(--text); border-color: var(--text-3); }
+  .chip.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .chip.active span { color: var(--bg); opacity: .6; }
+  .empty { padding: 3rem 0; text-align: center; }
+</style>

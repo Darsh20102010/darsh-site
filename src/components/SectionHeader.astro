@@ -1,0 +1,17 @@
+---
+interface Props { label?: string; title: string; lead?: string; align?: 'left' | 'center'; }
+const { label, title, lead, align = 'left' } = Astro.props;
+---
+<header class:list={['sh', 'reveal', align]}>
+  {label && <span class="label">{label}</span>}
+  <h2 set:html={title} />
+  {lead && <p class="lead">{lead}</p>}
+  <slot />
+</header>
+<style>
+  .sh { margin-bottom: clamp(2rem, 4vw, 3rem); max-width: 48rem; }
+  .sh h2 { margin-top: .9rem; }
+  .sh.center { text-align: center; margin-left: auto; margin-right: auto; }
+  .sh.center .label { justify-content: center; }
+  .sh.center .lead { margin-left: auto; margin-right: auto; }
+</style>

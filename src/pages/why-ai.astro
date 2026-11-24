@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import MiniVisual from '../components/MiniVisual.astro';
+import why from '../data/whyai.json';
+---
+<Layout title="Why AI?" description="Why I study Artificial Intelligence and Computer Science, and the questions I'm exploring.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="label reveal">Why AI & Computer Science?</span>
+      <h1 class="reveal">Because a good question deserves a working answer.</h1>
+      <p class="lead reveal reveal-d1">{why.opening}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {why.sections.map((s) => (
+        <article class="why reveal">
+          <div class="n mono">{s.n}</div>
+          <div class="body">
+            <h2>{s.title}</h2>
+            <p>{s.text}</p>
+            <div class="meta">
+              <div><span class="mono muted k">Question</span><p class="q">{s.question}</p></div>
+              <div><span class="mono muted k">Related work</span><p><a class="link" href={s.project.href}>{s.project.name} →</a></p></div>
+            </div>
+          </div>
+          <MiniVisual type={s.visual} />
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader label="Open questions" title="Questions I'm exploring" />
+      <ol class="qs">
+        {why.questions.map((q, i) => (
+          <li class="reveal"><span class="mono accent">Q{i + 1}</span><span>{q}</span></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Layout>
+<style>
+  .why { display: grid; grid-template-columns: 80px 1fr 260px; gap: 2rem; padding: 3rem 0; border-top: 1px solid var(--line); align-items: start; }
+  .why:first-child { border-top: 0; padding-top: 0; }
+  .n { font-size: 2rem; color: var(--text-3); line-height: 1; }
+  .why h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px dashed var(--line); }
+  .k { font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; }
+  .meta p { margin: .3rem 0 0; }
+  .q { color: var(--text); font-style: italic; }
+  .link { color: var(--cyan); }
+  @media (max-width: 960px) { .why { grid-template-columns: 1fr; gap: 1rem; } .meta { grid-template-columns: 1fr; } }
+  .qs { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 2.5rem; }
+  .qs li { display: grid; grid-template-columns: 3rem 1fr; padding: 1.2rem 0; border-top: 1px solid var(--line); font-family: var(--font-display); font-size: 1.2rem; line-height: 1.35; }
+  .qs .mono { font-size: .78rem; padding-top: .3rem; }
+  @media (max-width: 760px) { .qs { grid-template-columns: 1fr; } }
+</style>

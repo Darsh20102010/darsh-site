@@ -1,0 +1,18 @@
+{
+  "title": "IIT Kharagpur Young Innovators Programme",
+  "result": "4th Position",
+  "intro": "My first real taste of building something from an idea to a working model, and then defending it in front of judges.",
+  "rounds": [
+    { "k": "Round 1", "v": "Idea / write-up" },
+    { "k": "Round 2", "v": "Working smart city model" },
+    { "k": "Round 3", "v": "Presentation + questionnaire" },
+    { "k": "Result", "v": "4th Position" }
+  ],
+  "learning": ["Prototype Development", "Coding", "App Development", "Arduino", "Innovation", "Presentation", "Entrepreneurship"],
+  "gallery": [
+    { "label": "Project images", "src": "" },
+    { "label": "Smart city model", "src": "" },
+    { "label": "Presentation", "src": "" },
+    { "label": "Certificate", "src": "" }
+  ]
+}

@@ -1,0 +1,80 @@
+---
+// Hero portrait framed as a computer-vision detection, over a faint neural-network graph.
+import site from '../data/site.json';
+const layers = [3, 5, 5, 2];
+const W = 520, H = 560;
+const nodes = layers.map((n, li) =>
+  Array.from({ length: n }, (_, i) => ({ x: 40 + li * ((W - 80) / (layers.length - 1)), y: H / 2 + (i - (n - 1) / 2) * 92 }))
+);
+const edges: { x1: number; y1: number; x2: number; y2: number; d: number }[] = [];
+let k = 0;
+for (let l = 0; l < nodes.length - 1; l++)
+  for (const a of nodes[l]) for (const b of nodes[l + 1]) edges.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, d: (k++ * 0.37) % 6 });
+---
+<div class="hv">
+  <svg class="net" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice">
+    {edges.map((e) => <line x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2} />)}
+    {edges.filter((_, i) => i % 7 === 0).map((e) => (
+      <circle r="2" class="sig" style={`--d:${e.d}s; offset-path: path('M${e.x1},${e.y1} L${e.x2},${e.y2}')`} />
+    ))}
+    {nodes.flat().map((n) => <circle cx={n.x} cy={n.y} r="4.5" class="node" />)}
+  </svg>
+
+  <div class="frame">
+    {site.photo ? (
+      <img src={site.photo} alt={`Portrait of ${site.name}`} />
+    ) : (
+      <div class="card-model mono">
+        <div class="cm-head"><span class="accent">model</span> darsh.v12</div>
+        <dl>
+          <dt>input</dt><dd>real-world problems</dd>
+          <dt>trained on</dt><dd>CS50 · 14 blogs</dd>
+          <dt>shipped</dt><dd>Kisan AI <span class="ok">● live</span></dd>
+          <dt>published</dt><dd>Machine Unlearning</dd>
+          <dt>exploring</dt><dd>robot navigation</dd>
+          <dt>output</dt><dd class="accent">useful AI</dd>
+        </dl>
+      </div>
+    )}
+    <span class="c tl" /><span class="c tr" /><span class="c bl" /><span class="c br" />
+    <span class="tagline mono">{site.photo ? 'person: darsh · conf 0.99' : 'builder: darsh · conf 0.99'}</span>
+    <span class="scan" />
+  </div>
+
+  <div class="readout mono">
+    <div><span class="muted">loc</span> 16.51°N 80.65°E</div>
+    <div><span class="muted">focus</span> ai · cv · robotics</div>
+    <div><span class="muted">status</span> <span class="accent">building ▍</span></div>
+  </div>
+</div>
+
+<style>
+  .hv { position: relative; width: 100%; max-width: 480px; aspect-ratio: 13 / 14; margin-left: auto; }
+  .net { position: absolute; inset: -8% -14%; width: 128%; height: 116%; opacity: .55; }
+  .net line { stroke: var(--line-strong); stroke-width: .8; }
+  .node { fill: var(--bg); stroke: var(--text-3); stroke-width: 1.2; }
+  .sig { fill: var(--cyan); offset-distance: 0%; opacity: 0; animation: travel 6s linear infinite; animation-delay: var(--d); }
+  @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 10% { opacity: .9; } 90% { opacity: .9; } 100% { offset-distance: 100%; opacity: 0; } }
+
+  .frame { position: absolute; left: 14%; right: 14%; top: 9%; bottom: 13%; border-radius: 6px; overflow: hidden;
+    background: linear-gradient(160deg, var(--surface-2), var(--bg-2)); border: 1px solid var(--line); }
+  .frame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.9) contrast(1.02); }
+  .card-model { position: absolute; inset: 0; padding: 3.2rem 1.6rem 1.6rem; display: flex; flex-direction: column; justify-content: center; font-size: .78rem; }
+  .cm-head { color: var(--text-2); padding-bottom: .9rem; margin-bottom: .9rem; border-bottom: 1px dashed var(--line-strong); }
+  .card-model dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: .7rem 1rem; }
+  .card-model dt { color: var(--text-3); }
+  .card-model dd { margin: 0; color: var(--text); }
+  .card-model dd.accent { color: var(--cyan); }
+  .ok { color: var(--ok); }
+  .empty { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; color: var(--text-2); font-size: .78rem; letter-spacing: .1em; line-height: 2; }
+  .empty span { color: var(--text-3); letter-spacing: 0; font-size: .7rem; }
+  .c { position: absolute; width: 22px; height: 22px; border: 0 solid var(--cyan); }
+  .tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; } .tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+  .bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; } .br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+  .tagline { position: absolute; top: 8px; left: 38px; font-size: .66rem; background: var(--cyan); color: var(--bg); padding: .15rem .45rem; border-radius: 3px; }
+  .scan { position: absolute; left: 0; right: 0; height: 40%; top: -40%; background: linear-gradient(transparent, rgba(116,224,236,.07), transparent); animation: scan 7s var(--ease) infinite; }
+  @keyframes scan { 0% { top: -40%; } 60%, 100% { top: 100%; } }
+  .readout { position: absolute; right: 0; bottom: 0; font-size: .7rem; color: var(--text-2); background: rgba(14,20,36,.85); backdrop-filter: blur(8px);
+    border: 1px solid var(--line); border-radius: 8px; padding: .6rem .8rem; line-height: 1.7; }
+  @media (max-width: 860px) { .hv { margin: 0 auto; max-width: 380px; } }
+</style>

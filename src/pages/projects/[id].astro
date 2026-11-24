@@ -1,0 +1,88 @@
+---
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Pipeline from '../../components/Pipeline.astro';
+import Placeholder from '../../components/Placeholder.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import { getProjects } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((p) => ({ params: { id: p.id }, props: { project: p } }));
+}
+const { project } = Astro.props;
+const { Content } = await render(project);
+const d = project.data;
+---
+<Layout title={d.title} description={d.description} image={d.image || undefined}>
+  <section class="page-hero">
+    <div class="container">
+      <a href="/projects" class="mono muted back">← All projects</a>
+      <div class="btn-row" style="margin-top:2rem"><StatusBadge kind={d.statusKind} text={d.status} /><span class="mono muted role">{d.role}</span></div>
+      <h1 class="reveal">{d.title}</h1>
+      <p class="lead accent reveal">{d.subtitle}</p>
+      <p class="lead reveal reveal-d1">{d.description}</p>
+      {d.location && <p class="mono muted loc reveal">{d.location}</p>}
+      {d.demo && <div class="btn-row reveal" style="margin-top:1.5rem"><a class="btn btn-primary" href={d.demo} target="_blank" rel="noopener noreferrer">Try it live <span class="arrow">↗</span></a></div>}
+    </div>
+  </section>
+
+  {d.image && <section class="container"><Placeholder label={`${d.title} — hero screenshot`} src={d.image} ratio="16 / 9" class="reveal" /></section>}
+
+  <section class="section">
+    <div class="container">
+      <span class="label">Project overview</span>
+      <div style="margin-top:2rem"><Pipeline steps={d.pipeline} /></div>
+    </div>
+  </section>
+
+  {d.features.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <span class="label">Features</span>
+        <div class="grid grid-3" style="margin-top:2rem">
+          {d.features.map((f, i) => (
+            <article class="card lift reveal"><span class="num">F{String(i + 1).padStart(2, '0')}</span><h3 style="margin-top:1rem">{f.name}</h3><p>{f.text}</p></article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container case">
+      <aside class="side">
+        <div class="sticky">
+          <span class="label">Technology used</span>
+          <ul class="tags" style="margin:1rem 0 2rem">{d.tech.map((t) => <li class="tag">{t}</li>)}</ul>
+          <span class="label">Role</span>
+          <p style="margin-top:.6rem">{d.role}</p>
+        </div>
+      </aside>
+      <article class="prose"><Content /></article>
+    </div>
+  </section>
+
+  {d.gallery.some((g) => g.src) && (
+    <section class="section">
+      <div class="container">
+        <span class="label">Gallery</span>
+        <div class="grid gallery" style="margin-top:2rem">{d.gallery.filter((g) => g.src).map((g) => <figure class="gfig reveal"><Placeholder label={g.label} src={g.src} ratio={g.src ? "716 / 819" : "4 / 3"} />{g.src && <figcaption class="mono muted">{g.label}</figcaption>}</figure>)}</div>
+      </div>
+    </section>
+  )}
+</Layout>
+<style>
+  .loc { font-size: .8rem; }
+  .gallery { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .gfig { margin: 0; }
+  figcaption { font-size: .72rem; margin-top: .6rem; text-transform: uppercase; letter-spacing: .08em; }
+  .back { font-size: .8rem; }
+  .back:hover { color: var(--cyan); }
+  .role { font-size: .74rem; text-transform: uppercase; letter-spacing: .1em; }
+  h1 { margin-top: 1.2rem; }
+  .case { display: grid; grid-template-columns: 240px 1fr; gap: clamp(2rem, 6vw, 5rem); }
+  .sticky { position: sticky; top: 100px; }
+  .case :global(.prose h2:first-child) { margin-top: 0; }
+  @media (max-width: 860px) { .case { grid-template-columns: 1fr; } .sticky { position: static; } }
+</style>

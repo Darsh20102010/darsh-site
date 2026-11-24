@@ -1,0 +1,12 @@
+{
+  "intro": "Research is where I slow down and ask what a system is really doing. My work so far follows one thread: from how models handle data, to how AI helps people, to how it might eventually move through the physical world.",
+  "timelineTitle": "From Software AI to Physical AI",
+  "timeline": [
+    { "k": "AI Concepts", "v": "Foundations: how models learn." },
+    { "k": "Machine Unlearning", "v": "Published: how models can forget." },
+    { "k": "Kisan AI", "v": "Built: AI for farmers." },
+    { "k": "Computer Vision", "v": "Teaching systems to see the field." },
+    { "k": "Robot Navigation", "v": "Ongoing: finding a way through it." },
+    { "k": "Future Physical AI", "v": "Next: AI that acts in the world." }
+  ]
+}

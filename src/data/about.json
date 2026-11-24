@@ -1,0 +1,181 @@
+{
+  "intro": [
+    "I'm Darsh, a student at Shamrock International School in Vijayawada. I got into computer science the way people get into puzzles: one problem, then another, until it became a habit.",
+    "Over time the puzzles got bigger. I didn't only want to know how AI works. I wanted to know whether it could work for people who would never call themselves technical. That question became Kisan AI. A curiosity about what models remember became a research paper on machine unlearning.",
+    "Away from code you'll find me on a basketball court, in a committee room arguing about AI policy, or volunteering. I've learned that the hardest problems are rarely only technical."
+  ],
+  "curious": [
+    {
+      "title": "Artificial Intelligence",
+      "text": "How systems can reason, decide and be useful, and what they should never be trusted to do alone."
+    },
+    {
+      "title": "Machine Learning",
+      "text": "Models that learn from data, and the harder question of how they can forget it."
+    },
+    {
+      "title": "Computer Vision",
+      "text": "Teaching machines to see, especially outside the tidy conditions of a lab."
+    },
+    {
+      "title": "Robotics",
+      "text": "Where software meets the physical world and has to deal with mud, light and uneven ground."
+    },
+    {
+      "title": "Algorithms",
+      "text": "The structured thinking underneath everything else."
+    },
+    {
+      "title": "Technology for Social Impact",
+      "text": "Building for people who are usually the last to get good tools."
+    }
+  ],
+  "learn": [
+    {
+      "title": "Build",
+      "text": "I understand something properly once I've made it work."
+    },
+    {
+      "title": "Research",
+      "text": "Reading what others found before me, then asking the next question."
+    },
+    {
+      "title": "Experiment",
+      "text": "Trying things, breaking things, measuring what changed."
+    },
+    {
+      "title": "Explain",
+      "text": "If I can't write it simply, I don't understand it yet."
+    }
+  ],
+  "journey": [
+    {
+      "when": "Grade 9",
+      "title": "Innovation & teamwork",
+      "tags": [
+        "Smart City Innovation",
+        "IIT Kharagpur YIP",
+        "Basketball Leadership",
+        "Started 14BLOGS"
+      ]
+    },
+    {
+      "when": "Grade 10",
+      "title": "Leadership, policy & people",
+      "tags": [
+        "MUN",
+        "Public Policy",
+        "Community Service",
+        "Head Boy",
+        "Debate & Diplomacy"
+      ]
+    },
+    {
+      "when": "Grade 11",
+      "title": "Going deep into AI",
+      "tags": [
+        "AI Research",
+        "Technical Blogging",
+        "CS50",
+        "Best Brains Internship",
+        "Machine Unlearning (published)",
+        "Kisan AI",
+        "AI Olympiad"
+      ]
+    },
+    {
+      "when": "Grade 12",
+      "title": "From software to the physical world",
+      "text": "Current and upcoming focus.",
+      "tags": [
+        "Advanced AI Research",
+        "Robotics",
+        "Computer Vision",
+        "Future Projects"
+      ]
+    }
+  ],
+  "beyond": [
+    {
+      "title": "Basketball",
+      "text": "House Captain and winner of the school basketball finale."
+    },
+    {
+      "title": "Debate",
+      "text": "Arguing both sides until the real question shows up."
+    },
+    {
+      "title": "MUN",
+      "text": "Four conferences, three of them on AI's place in the world."
+    },
+    {
+      "title": "Leadership",
+      "text": "Head Boy of my school, 2024–25."
+    },
+    {
+      "title": "Public Policy",
+      "text": "Speaker on an Andhra Pradesh Government panel on the Gorumudda Mid-Day-Meal Scheme."
+    },
+    {
+      "title": "Community Service",
+      "text": "Teaching and donating furniture at the Chethuva Foundation, a school for autistic children."
+    },
+    {
+      "title": "Writing",
+      "text": "14BLOGS: 14+ technical blogs, written from Grade 9 to Grade 12."
+    }
+  ],
+  "beyondThemes": [
+    "People",
+    "Policy",
+    "Communication",
+    "Leadership",
+    "Real-world impact"
+  ],
+  "skills": [
+    {
+      "name": "C",
+      "kind": "Language"
+    },
+    {
+      "name": "Python",
+      "kind": "Language"
+    },
+    {
+      "name": "SQL",
+      "kind": "Language"
+    },
+    {
+      "name": "JavaScript",
+      "kind": "Language"
+    },
+    {
+      "name": "Machine Learning",
+      "kind": "AI"
+    },
+    {
+      "name": "Computer Vision",
+      "kind": "AI"
+    },
+    {
+      "name": "Front-End Development",
+      "kind": "Web"
+    },
+    {
+      "name": "Arduino",
+      "kind": "Hardware"
+    }
+  ],
+  "spoken": [
+    "English",
+    "Telugu"
+  ],
+  "interests": [
+    "Artificial Intelligence",
+    "AI Ethics & Data Privacy",
+    "Robotics",
+    "Agricultural Technology",
+    "Model United Nations",
+    "Basketball"
+  ]
+}

@@ -1,0 +1,20 @@
+---
+import StatusBadge from './StatusBadge.astro';
+interface Props { href: string; title: string; status: string; statusKind: string; role: string; description: string; themes: string[]; }
+const { href, title, status, statusKind, role, description, themes } = Astro.props;
+---
+<a href={href} class="card lift rc reveal">
+  <div class="top"><StatusBadge kind={statusKind} text={status} /><span class="mono muted role">{role}</span></div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <ul class="tags">{themes.map((t) => <li class="tag">{t}</li>)}</ul>
+  <span class="more mono">Read the case study →</span>
+</a>
+<style>
+  .rc { display: flex; flex-direction: column; gap: .4rem; padding: 2rem; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .role { font-size: .74rem; text-transform: uppercase; letter-spacing: .1em; }
+  h3 { font-size: 1.6rem; }
+  .tags { margin: .6rem 0 1.2rem; }
+  .more { font-size: .78rem; margin-top: auto; }
+</style>

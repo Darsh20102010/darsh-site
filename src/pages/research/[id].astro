@@ -1,0 +1,79 @@
+---
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import PublicationCard from '../../components/PublicationCard.astro';
+import Placeholder from '../../components/Placeholder.astro';
+import { getResearch } from '../../lib/content';
+import site from '../../data/site.json';
+
+export async function getStaticPaths() {
+  return (await getResearch()).map((r) => ({ params: { id: r.id }, props: { item: r } }));
+}
+const { item } = Astro.props;
+const { Content, headings } = await render(item);
+const d = item.data;
+const toc = headings.filter((h) => h.depth === 2);
+---
+<Layout title={d.title} description={d.description}>
+  <section class="page-hero">
+    <div class="container">
+      <a href="/research" class="mono muted back">← All research</a>
+      <div class="btn-row" style="margin-top:2rem"><StatusBadge kind={d.statusKind} text={d.status} /><span class="mono muted role">{d.role}</span></div>
+      <h1 class="reveal">{d.title}</h1>
+      <p class="lead reveal reveal-d1">{d.description}</p>
+      <ul class="tags reveal reveal-d2" style="margin-top:1.5rem">{d.themes.map((t) => <li class="tag">{t}</li>)}</ul>
+    </div>
+  </section>
+
+  {item.id === 'robot-navigation' && (
+    <section class="container">
+      <div class="study reveal" aria-label="Study design">
+        <div class="col"><span class="mono muted">Approach A</span><h3>Classical geometric SLAM</h3><p>Hand-designed, geometry-based feature tracking.</p></div>
+        <div class="vs mono">vs</div>
+        <div class="col"><span class="mono muted">Approach B</span><h3>Deep-learning-based</h3><p>Parts of the problem learned from data.</p></div>
+        <div class="axes">
+          <div><span class="mono muted">Evaluated on</span><ul class="tags"><li class="tag">Accuracy</li><li class="tag">Computational cost</li><li class="tag">Robustness</li></ul></div>
+          <div><span class="mono muted">Across</span><ul class="tags"><li class="tag">Indoor / Urban</li><li class="tag">Outdoor / Agricultural</li></ul></div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container case">
+      <aside>
+        <div class="sticky">
+          {toc.length > 0 && <>
+            <span class="label">Contents</span>
+            <ol class="toc">{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+          </>}
+        </div>
+      </aside>
+      <div>
+        <article class="prose"><Content /></article>
+        {d.image && <div style="margin-top:3rem"><Placeholder label="Research diagram" src={d.image} ratio="16 / 9" /></div>}
+        {d.statusKind === 'published' && <div style="margin-top:3rem"><PublicationCard title={d.paperTitle || d.title} venue={d.venue} url={d.paperUrl || site.links.paper} /></div>}
+      </div>
+    </div>
+  </section>
+</Layout>
+<style>
+  .back { font-size: .8rem; } .back:hover { color: var(--cyan); }
+  .role { font-size: .74rem; text-transform: uppercase; letter-spacing: .1em; }
+  h1 { margin-top: 1.2rem; }
+  .case { display: grid; grid-template-columns: 220px 1fr; gap: clamp(2rem, 6vw, 5rem); }
+  .sticky { position: sticky; top: 100px; }
+  .toc { list-style: none; padding: 0; margin: 1rem 0 0; counter-reset: t; }
+  .toc li { counter-increment: t; padding: .4rem 0; font-size: .9rem; border-bottom: 1px solid var(--line); }
+  .toc li::before { content: counter(t, decimal-leading-zero) '  '; font-family: var(--font-mono); font-size: .7rem; color: var(--text-3); white-space: pre; }
+  .toc a { color: var(--text-2); } .toc a:hover { color: var(--cyan); }
+  .case :global(.prose h2:first-child) { margin-top: 0; }
+  @media (max-width: 860px) { .case { grid-template-columns: 1fr; } .sticky { position: static; } }
+  .study { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem; background: var(--surface); }
+  .col .mono, .axes .mono { font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; display: block; margin-bottom: .6rem; }
+  .col p { margin: 0; font-size: .94rem; }
+  .vs { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--cyan); display: grid; place-items: center; color: var(--cyan); }
+  .axes { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--line); }
+  @media (max-width: 760px) { .study, .axes { grid-template-columns: 1fr; } .vs { margin: 0 auto; } }
+</style>

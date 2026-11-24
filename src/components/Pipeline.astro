@@ -1,0 +1,30 @@
+---
+// Horizontal flow diagram (wraps vertical on mobile). steps: [{ k, v? }]
+interface Props { steps: { k: string; v?: string }[]; compact?: boolean; }
+const { steps, compact = false } = Astro.props;
+---
+<ol class:list={['pipe', { compact }]}>
+  {steps.map((s, i) => (
+    <li class="reveal" style={`transition-delay:${i * 70}ms`}>
+      <span class="idx mono">{String(i + 1).padStart(2, '0')}</span>
+      <span class="k">{s.k}</span>
+      {s.v && <span class="v">{s.v}</span>}
+    </li>
+  ))}
+</ol>
+<style>
+  .pipe { list-style: none; padding: 0; margin: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0; counter-reset: s; }
+  .pipe li { position: relative; padding: 1.1rem 1rem 1.1rem 0; border-top: 1px solid var(--line-strong); }
+  .pipe li::before { content: ''; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--cyan); }
+  .pipe li:last-child::before { background: var(--cyan); }
+  .idx { display: block; font-size: .68rem; color: var(--text-3); margin-bottom: .35rem; }
+  .k { display: block; font-family: var(--font-mono); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text); }
+  .v { display: block; font-size: .88rem; color: var(--text-2); margin-top: .35rem; line-height: 1.5; }
+  .compact .v { display: none; }
+  @media (max-width: 860px) {
+    .pipe { grid-auto-flow: row; }
+    .pipe li { border-top: 0; border-left: 1px solid var(--line-strong); padding: .2rem 0 1.4rem 1.4rem; }
+    .pipe li::before { top: .35rem; left: -5px; }
+    .compact .v { display: block; }
+  }
+</style>

@@ -1,0 +1,17 @@
+{
+  "opening": "I came to AI through a question that sounds simple: can a machine learn? The more I studied it, the more the questions multiplied. How does it learn? What does it remember? Who is it actually useful for? I'm drawn to computer science because it lets me take a question like that and build something that answers it. I'm drawn to AI because the answers matter to people far outside a computer lab.",
+  "sections": [
+    { "n": "01", "title": "Understanding Intelligence", "text": "Before I can build intelligent systems, I want to understand what intelligence in a machine even means: how a model turns data into decisions, and where that process breaks.", "question": "What does it actually mean for a machine to learn something?", "project": { "name": "Technical writing", "href": "/blog" }, "visual": "net" },
+    { "n": "02", "title": "Building Useful Technology", "text": "A model is only as good as the difference it makes. I care about building tools that someone without technical training can pick up and use.", "question": "How can AI be designed for people who are not technically trained?", "project": { "name": "Kisan AI", "href": "/projects/kisan-ai" }, "visual": "pipeline" },
+    { "n": "03", "title": "Researching AI Systems", "text": "Research lets me slow down and ask what a system is really doing, including the uncomfortable parts, like what it remembers about the people whose data it learned from.", "question": "How should AI systems handle data privacy?", "project": { "name": "Machine Unlearning", "href": "/research/machine-unlearning" }, "visual": "matrix" },
+    { "n": "04", "title": "Applying AI to Real Problems", "text": "The real world is messier than any benchmark. I want to understand what it takes for AI to work there, in fields, on uneven ground, in changing light.", "question": "How can AI move from software into the physical world?", "project": { "name": "Vision-Based Robot Navigation", "href": "/research/robot-navigation" }, "visual": "cv" }
+  ],
+  "questions": [
+    "How can AI make technology more accessible?",
+    "How can machine learning solve real-world problems?",
+    "How can computer vision work outside controlled environments?",
+    "How should AI systems handle data privacy?",
+    "How can AI be designed for people who are not technically trained?",
+    "How can AI move from software into the physical world?"
+  ]
+}

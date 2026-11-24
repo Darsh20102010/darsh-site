@@ -1,0 +1,289 @@
+# ─────────────────────────────────────────────────────────────
+#  Admin dashboard config (Sveltia CMS — free & open source)
+#  1. Replace YOUR-GITHUB-USERNAME below with your GitHub username.
+#  2. See README.md → "Admin dashboard" for how to log in.
+# ─────────────────────────────────────────────────────────────
+backend:
+  name: github
+  repo: Darsh20102010/darsh-site
+  branch: main
+  # base_url: https://your-auth-worker.your-name.workers.dev   # only if you set up the OAuth worker
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  # ───────────── BLOG ─────────────
+  - name: blog
+    label: Blog posts
+    label_singular: Blog post
+    folder: src/content/blog
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: [number, date, title]
+    summary: "{{number}}. {{title}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Blog number, name: number, widget: number, value_type: int, required: false, hint: "Higher numbers show first" }
+      - { label: Date (optional), name: date, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD", required: false }
+      - label: Category
+        name: category
+        widget: select
+        options: [AI Fundamentals, Machine Learning, Computer Vision, Robotics, Computer Science, Algorithms, AI Ethics, Technology & Society, AI Applications]
+      - { label: Short description, name: description, widget: text }
+      - { label: Featured image, name: image, widget: image, required: false }
+      - label: Key takeaways
+        name: takeaways
+        widget: list
+        required: false
+        field: { label: Takeaway, name: takeaway, widget: string }
+      - { label: Draft (hide from site), name: draft, widget: boolean, default: false, required: false }
+      - { label: Article, name: body, widget: markdown }
+
+  # ───────────── PROJECTS ─────────────
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: src/content/projects
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Subtitle, name: subtitle, widget: string }
+      - { label: Role, name: role, widget: string }
+      - { label: Status text, name: status, widget: string, hint: "e.g. Self-built project, Current project, Future idea" }
+      - { label: Status colour, name: statusKind, widget: select, options: [project, ongoing, published, future], default: project }
+      - { label: Order (1 = first), name: order, widget: number, value_type: int, default: 10 }
+      - { label: Featured on home page, name: featured, widget: boolean, default: false, required: false }
+      - { label: Description, name: description, widget: text }
+      - { label: Main image, name: image, widget: image, required: false }
+      - { label: Live demo URL, name: demo, widget: string, required: false }
+      - { label: Portrait image (home page), name: portrait, widget: image, required: false }
+      - { label: Location / users, name: location, widget: string, required: false }
+      - label: Features
+        name: features
+        widget: list
+        required: false
+        fields: [{ label: Name, name: name, widget: string }, { label: Text, name: text, widget: text }]
+      - label: Technology used
+        name: tech
+        widget: list
+        required: false
+        field: { label: Item, name: item, widget: string }
+      - label: Overview pipeline (steps)
+        name: pipeline
+        widget: list
+        required: false
+        fields: [{ label: Step, name: k, widget: string }, { label: Detail, name: v, widget: string, required: false }]
+      - label: Gallery
+        name: gallery
+        widget: list
+        required: false
+        fields: [{ label: Label, name: label, widget: string }, { label: Image, name: src, widget: image, required: false }]
+      - { label: Case study, name: body, widget: markdown }
+
+  # ───────────── RESEARCH ─────────────
+  - name: research
+    label: Research
+    label_singular: Research item
+    folder: src/content/research
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Status text, name: status, widget: string, hint: "e.g. Published Research / Ongoing Research" }
+      - { label: Status colour, name: statusKind, widget: select, options: [published, ongoing, future] }
+      - { label: Role, name: role, widget: string }
+      - { label: Order, name: order, widget: number, value_type: int, default: 10 }
+      - { label: Description, name: description, widget: text }
+      - label: Themes
+        name: themes
+        widget: list
+        field: { label: Theme, name: theme, widget: string }
+      - { label: Paper link (published only), name: paperUrl, widget: string, required: false }
+      - { label: Journal / venue, name: venue, widget: string, required: false }
+      - { label: Full paper title, name: paperTitle, widget: string, required: false }
+      - { label: Image, name: image, widget: image, required: false }
+      - { label: Write-up, name: body, widget: markdown }
+
+  # ───────────── PAGE CONTENT & SETTINGS ─────────────
+  - name: pages
+    label: Pages & settings
+    files:
+      - name: site
+        label: "⚙️ Site settings (links, photo, SEO)"
+        file: src/data/site.json
+        fields:
+          - { label: Full name, name: name, widget: string }
+          - { label: Short name, name: shortName, widget: string }
+          - { label: Location, name: location, widget: string }
+          - { label: School, name: school, widget: string }
+          - { label: SEO title, name: seoTitle, widget: string }
+          - { label: SEO description, name: seoDescription, widget: text }
+          - { label: Footer tagline, name: footerTagline, widget: string }
+          - { label: Profile photo, name: photo, widget: image, required: false }
+          - label: Links
+            name: links
+            widget: object
+            fields:
+              - { label: Email, name: email, widget: string, required: false }
+              - { label: LinkedIn URL, name: linkedin, widget: string, required: false }
+              - { label: GitHub URL, name: github, widget: string, required: false }
+              - { label: Resume (upload a PDF), name: resume, widget: file, required: false }
+              - { label: Published paper URL, name: paper, widget: string, required: false }
+          - { label: Contact form endpoint (Formspree / Web3Forms), name: contactFormEndpoint, widget: string, required: false }
+
+      - name: home
+        label: Home page
+        file: src/data/home.json
+        fields:
+          - { label: Greeting, name: greeting, widget: string }
+          - { label: Headline, name: headline, widget: string }
+          - { label: Subheading, name: subheading, widget: string }
+          - { label: Introduction, name: intro, widget: text }
+          - { label: Focus strip, name: focus, widget: list, field: { label: Item, name: item, widget: string } }
+          - { label: Pipeline title, name: pipelineTitle, widget: string }
+          - { label: Pipeline, name: pipeline, widget: list, fields: [{ label: Step, name: k, widget: string }, { label: Detail, name: v, widget: string }] }
+          - { label: Story title, name: storyTitle, widget: string }
+          - { label: Story lead, name: storyLead, widget: text }
+          - label: Story (verbs)
+            name: story
+            widget: list
+            fields:
+              - { label: Verb, name: verb, widget: string }
+              - { label: Items, name: items, widget: list, field: { label: Item, name: item, widget: string } }
+              - { label: Link, name: href, widget: string }
+          - { label: Closing line, name: closing, widget: text }
+
+      - name: about
+        label: About page
+        file: src/data/about.json
+        fields:
+          - { label: Introduction (paragraphs), name: intro, widget: list, field: { label: Paragraph, name: p, widget: text } }
+          - { label: What I'm curious about, name: curious, widget: list, fields: [{ label: Title, name: title, widget: string }, { label: Text, name: text, widget: text }] }
+          - { label: How I like to learn, name: learn, widget: list, fields: [{ label: Title, name: title, widget: string }, { label: Text, name: text, widget: text }] }
+          - label: Journey
+            name: journey
+            widget: list
+            fields:
+              - { label: When, name: when, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Text, name: text, widget: text, required: false }
+              - { label: Tags, name: tags, widget: list, field: { label: Tag, name: tag, widget: string } }
+          - { label: Beyond code, name: beyond, widget: list, fields: [{ label: Title, name: title, widget: string }, { label: Text, name: text, widget: text }] }
+          - { label: Beyond code themes, name: beyondThemes, widget: list, field: { label: Theme, name: theme, widget: string } }
+          - { label: Skills, name: skills, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Kind, name: kind, widget: string }] }
+          - { label: Languages spoken, name: spoken, widget: list, field: { label: Language, name: l, widget: string } }
+          - { label: Interests, name: interests, widget: list, field: { label: Interest, name: i, widget: string } }
+
+      - name: whyai
+        label: Why AI page
+        file: src/data/whyai.json
+        fields:
+          - { label: Opening, name: opening, widget: text }
+          - label: Sections
+            name: sections
+            widget: list
+            fields:
+              - { label: Number, name: n, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Text, name: text, widget: text }
+              - { label: Question, name: question, widget: string }
+              - { label: Related project, name: project, widget: object, fields: [{ label: Name, name: name, widget: string }, { label: Link, name: href, widget: string }] }
+              - { label: Visual, name: visual, widget: select, options: [net, pipeline, matrix, cv] }
+          - { label: Questions I'm exploring, name: questions, widget: list, field: { label: Question, name: q, widget: string } }
+
+      - name: researchpage
+        label: Research page (intro & timeline)
+        file: src/data/research.json
+        fields:
+          - { label: Intro, name: intro, widget: text }
+          - { label: Timeline title, name: timelineTitle, widget: string }
+          - { label: Timeline, name: timeline, widget: list, fields: [{ label: Step, name: k, widget: string }, { label: Detail, name: v, widget: string }] }
+
+      - name: experience
+        label: Experience page
+        file: src/data/experience.json
+        fields:
+          - label: Internship
+            name: internship
+            widget: object
+            fields:
+              - { label: Organisation, name: org, widget: string }
+              - { label: Role, name: role, widget: string }
+              - { label: Period, name: period, widget: string, required: false }
+              - { label: Location, name: location, widget: string, required: false }
+              - { label: Description, name: description, widget: text }
+              - { label: Tags, name: tags, widget: list, field: { label: Tag, name: tag, widget: string } }
+              - { label: What I learned, name: learned, widget: text }
+          - label: CS50
+            name: cs50
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Skills, name: skills, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Kind, name: kind, widget: string }] }
+              - { label: What CS50 changed for me, name: changed, widget: text }
+          - label: Head Boy
+            name: headBoy
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: School, name: org, widget: string }
+              - { label: Year, name: year, widget: string }
+              - { label: Highlights, name: highlights, widget: list, field: { label: Item, name: item, widget: string } }
+              - { label: Reflection, name: reflection, widget: text }
+          - label: Basketball
+            name: basketball
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Sport, name: sport, widget: string }
+              - { label: Qualities, name: show, widget: list, field: { label: Item, name: item, widget: string } }
+              - { label: What sport taught me, name: taught, widget: list, fields: [{ label: Lesson, name: k, widget: string }, { label: Detail, name: v, widget: string }] }
+          - { label: Policy intro, name: policyIntro, widget: text }
+          - label: MUN conferences
+            name: mun
+            widget: list
+            fields:
+              - { label: Conference, name: conference, widget: string }
+              - { label: Country, name: country, widget: string }
+              - { label: Committee, name: committee, widget: string }
+              - { label: Agenda / notes, name: agenda, widget: list, field: { label: Item, name: item, widget: string } }
+              - { label: Awards, name: awards, widget: list, required: false, field: { label: Award, name: award, widget: string } }
+          - label: Social impact
+            name: impact
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Role, name: role, widget: string }
+              - { label: Highlights, name: highlights, widget: list, field: { label: Item, name: item, widget: string } }
+              - { label: Reflection, name: reflection, widget: text, required: false }
+
+      - name: achievements
+        label: Achievements page
+        file: src/data/achievements.json
+        fields:
+          - { label: Recognition cards, name: recognition, widget: list, fields: [{ label: Title, name: title, widget: string }, { label: Result, name: result, widget: string }, { label: Category, name: category, widget: string }] }
+          - { label: Competitions intro, name: competitionsIntro, widget: text }
+          - label: Competitions
+            name: competitions
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Result, name: result, widget: string }
+              - { label: Detail, name: detail, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Highlights, name: highlights, widget: list, field: { label: Item, name: item, widget: string } }
+          - { label: Certificates, name: certificates, widget: list, fields: [{ label: Label, name: label, widget: string }, { label: Image, name: src, widget: image, required: false }] }
+
+      - name: innovation
+        label: Innovation (IIT KGP YIP)
+        file: src/data/innovation.json
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Result, name: result, widget: string }
+          - { label: Intro, name: intro, widget: text }
+          - { label: Rounds, name: rounds, widget: list, fields: [{ label: Round, name: k, widget: string }, { label: Detail, name: v, widget: string }] }
+          - { label: What I learned, name: learning, widget: list, field: { label: Item, name: item, widget: string } }
+          - { label: Gallery, name: gallery, widget: list, fields: [{ label: Label, name: label, widget: string }, { label: Image, name: src, widget: image, required: false }] }

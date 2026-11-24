@@ -1,0 +1,94 @@
+{
+  "recognition": [
+    {
+      "title": "IJAIO · India Rank 1",
+      "result": "Gold Medal",
+      "category": "AI Olympiad"
+    },
+    {
+      "title": "SEAMO",
+      "result": "Bronze Medal",
+      "category": "Mathematics Olympiad"
+    },
+    {
+      "title": "IIT Kharagpur Young Innovators Programme",
+      "result": "4th Position",
+      "category": "Innovation"
+    },
+    {
+      "title": "INAIO AI Olympiad (ACM India)",
+      "result": "Qualified to Stage 2",
+      "category": "AI Competition"
+    },
+    {
+      "title": "VIVA MUN — DISEC",
+      "result": "Best Delegate",
+      "category": "Diplomacy"
+    },
+    {
+      "title": "VIVA MUN — UNSC",
+      "result": "Special Mention",
+      "category": "Diplomacy"
+    },
+    {
+      "title": "Shamrock International School",
+      "result": "Head Boy",
+      "category": "Leadership"
+    },
+    {
+      "title": "School Basketball Finale (House Captain)",
+      "result": "Winner",
+      "category": "Sport & Leadership"
+    }
+  ],
+  "certificates": [
+    {
+      "label": "Certificate 1",
+      "src": ""
+    },
+    {
+      "label": "Certificate 2",
+      "src": ""
+    },
+    {
+      "label": "Certificate 3",
+      "src": ""
+    }
+  ],
+  "competitionsIntro": "Solving applied AI, ML and maths problems under competitive conditions.",
+  "competitions": [
+    {
+      "title": "IJAIO",
+      "result": "Gold Medal",
+      "detail": "India Rank 1",
+      "description": "Won a Gold Medal and ranked first in India.",
+      "highlights": [
+        "Applied AI",
+        "Problem Solving",
+        "National Rank 1"
+      ]
+    },
+    {
+      "title": "INAIO AI Olympiad (ACM India)",
+      "result": "Qualified to Stage 2",
+      "detail": "Stage 1 → Stage 2",
+      "description": "Prepared for and competed in applied AI/ML problem sets under competitive conditions and qualified to Stage 2.",
+      "highlights": [
+        "Applied AI",
+        "Problem Solving",
+        "Technical Depth",
+        "Competitive Thinking"
+      ]
+    },
+    {
+      "title": "SEAMO",
+      "result": "Bronze Medal",
+      "detail": "Mathematics",
+      "description": "Won a Bronze Medal in the mathematics olympiad.",
+      "highlights": [
+        "Mathematics",
+        "Problem Solving"
+      ]
+    }
+  ]
+}

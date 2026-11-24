@@ -1,0 +1,21 @@
+---
+interface Props { org: string; role: string; period?: string; description: string; tags?: string[]; }
+const { org, role, period, description, tags = [] } = Astro.props;
+---
+<article class="card ec reveal">
+  <div class="head">
+    <div><h3>{org}</h3><div class="role mono">{role}</div></div>
+    {period && <span class="mono muted per">{period}</span>}
+  </div>
+  <p>{description}</p>
+  {tags.length > 0 && <ul class="tags">{tags.map((t) => <li class="tag">{t}</li>)}</ul>}
+  <slot />
+</article>
+<style>
+  .ec { padding: 2rem; }
+  .head { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  h3 { font-size: 1.6rem; margin-bottom: .2rem; }
+  .role { color: var(--cyan); font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; }
+  .per { font-size: .78rem; }
+  .tags { margin-top: 1.2rem; }
+</style>

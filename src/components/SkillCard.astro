@@ -1,0 +1,11 @@
+---
+interface Props { name: string; kind?: string; }
+const { name, kind } = Astro.props;
+---
+<div class="sk reveal"><span class="mono muted">{kind}</span><span class="n">{name}</span></div>
+<style>
+  .sk { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1rem 1.1rem; background: var(--surface); display: flex; flex-direction: column; gap: .3rem; transition: border-color .25s; }
+  .sk:hover { border-color: var(--cyan); }
+  .sk .mono { font-size: .66rem; text-transform: uppercase; letter-spacing: .12em; }
+  .n { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; }
+</style>

@@ -1,0 +1,6 @@
+---
+// kind: published | ongoing | project | future
+interface Props { kind?: string; text: string; }
+const { kind = 'project', text } = Astro.props;
+---
+<span class={`status status-${kind}`}>{text}</span>

@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Timeline from '../components/Timeline.astro';
+import Placeholder from '../components/Placeholder.astro';
+import SkillCard from '../components/SkillCard.astro';
+import about from '../data/about.json';
+import site from '../data/site.json';
+---
+<Layout title="About" description={`About ${site.name}: student, builder and researcher in AI and Computer Science.`}>
+  <section class="page-hero">
+    <div class:list={['container', { split: site.photo }]}>
+      <div>
+        <span class="label reveal">About me</span>
+        <h1 class="reveal">Curious first. Technical second.</h1>
+        <div class="intro reveal reveal-d1">{about.intro.map((p) => <p>{p}</p>)}</div>
+      </div>
+      {site.photo && <div class="reveal reveal-d2"><Placeholder label="Photo of Darsh" src={site.photo} ratio="4 / 5" /></div>}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader label="Interests" title="What I'm curious about" />
+      <div class="grid grid-3">
+        {about.curious.map((c, i) => (
+          <article class="card lift reveal">
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 style="margin-top:1.2rem">{c.title}</h3>
+            <p>{c.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader label="Method" title="How I like to learn" />
+      <div class="grid grid-4 learn">
+        {about.learn.map((l, i) => (
+          <article class="card reveal">
+            <span class="mono accent step">{['build()', 'research()', 'experiment()', 'explain()'][i] ?? ''}</span>
+            <h3>{l.title}</h3>
+            <p>{l.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="toolkit">
+    <div class="container">
+      <SectionHeader label="Toolkit" title="What I work with" />
+      <div class="grid skills">{about.skills.map((s) => <SkillCard name={s.name} kind={s.kind} />)}</div>
+      <div class="split" style="margin-top:2.5rem">
+        <div class="reveal"><span class="label">Interests</span><ul class="tags" style="margin-top:1rem">{about.interests.map((t) => <li class="tag">{t}</li>)}</ul></div>
+        <div class="reveal"><span class="label">Languages I speak</span><ul class="tags" style="margin-top:1rem">{about.spoken.map((t) => <li class="tag">{t}</li>)}</ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="journey">
+    <div class="container">
+      <SectionHeader label="Timeline" title="Darsh's journey" lead="From a smart city model in Grade 9 to AI research and robotics in Grade 12." />
+      <Timeline items={about.journey} />
+    </div>
+  </section>
+
+  <section class="section" id="beyond">
+    <div class="container">
+      <SectionHeader label="Beyond code" title="Technology is about people, too." lead={`Outside of building and research, I care about ${about.beyondThemes.join(', ').toLowerCase()}.`} />
+      <div class="grid grid-4">
+        {about.beyond.map((b) => (
+          <article class="card lift reveal"><h3>{b.title}</h3><p>{b.text}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+<style>
+  .intro p { font-size: 1.1rem; }
+  .intro { margin-top: 1.5rem; max-width: 44rem; }
+  .skills { grid-template-columns: repeat(4, 1fr); gap: .75rem; }
+  @media (max-width: 640px) { .skills { grid-template-columns: repeat(2, 1fr); } }
+  .step { font-size: .78rem; display: block; margin-bottom: 1.2rem; }
+</style>

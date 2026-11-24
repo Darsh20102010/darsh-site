@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Pipeline from '../../components/Pipeline.astro';
+import Placeholder from '../../components/Placeholder.astro';
+import { getProjects } from '../../lib/content';
+import inno from '../../data/innovation.json';
+
+const projects = await getProjects();
+const featured = projects.filter((p) => p.data.featured);
+const others = projects.filter((p) => !p.data.featured);
+---
+<Layout title="Projects" description="Projects by Darsh: Kisan AI, an AI assistant for farmers, and a smart city model at the IIT Kharagpur Young Innovators Programme.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="label reveal">Projects</span>
+      <h1 class="reveal">Things I've built to see if an idea holds up.</h1>
+      <p class="lead reveal reveal-d1">Every project starts as a question about a real problem and ends with something that has to survive contact with real users.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      {featured.map((p) => (
+        <ProjectCard href={`/projects/${p.id}`} title={p.data.title} subtitle={p.data.subtitle} status={p.data.status} statusKind={p.data.statusKind}
+          role={p.data.role} description={p.data.description} tags={p.data.features.map((f) => f.name)} image={p.data.image} />
+      ))}
+      {featured.filter((p) => p.data.demo).map((p) => (
+        <div class="btn-row" style="margin-top:1.25rem">
+          <a class="btn btn-primary" href={`/projects/${p.id}`}>Read the {p.data.title} case study <span class="arrow">→</span></a>
+          <a class="btn" href={p.data.demo} target="_blank" rel="noopener noreferrer">Try it live ↗</a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id="innovation">
+    <div class="container">
+      <SectionHeader label="Innovation" title={`${inno.title}<br/><span class="accent">${inno.result}</span>`} lead={inno.intro} />
+      <Pipeline steps={inno.rounds} />
+      <div class:list={[{ split: inno.gallery.some((g) => g.src) }]} style="margin-top:3.5rem">
+        <div class="reveal">
+          <span class="label">What I learned</span>
+          <ul class="tags" style="margin-top:1.2rem">{inno.learning.map((l) => <li class="tag">{l}</li>)}</ul>
+        </div>
+        {inno.gallery.some((g) => g.src) && <div class="grid grid-2 reveal reveal-d1">
+          {inno.gallery.filter((g) => g.src).map((g) => <Placeholder label={g.label} src={g.src} ratio="4 / 3" />)}
+        </div>}
+      </div>
+    </div>
+  </section>
+
+  {others.length > 0 && <section class="section">
+    <div class="container">
+      <SectionHeader label="More builds" title="Coding projects" lead="Smaller projects and experiments." />
+      <div class="grid grid-2">
+        {others.map((p) => (
+          <ProjectCard href={`/projects/${p.id}`} title={p.data.title} subtitle={p.data.subtitle} status={p.data.status} statusKind={p.data.statusKind}
+            role={p.data.role} description={p.data.description} tags={p.data.tech} image={p.data.image} />
+        ))}
+      </div>
+    </div>
+  </section>}
+</Layout>

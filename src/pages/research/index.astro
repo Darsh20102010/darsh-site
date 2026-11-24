@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import ResearchCard from '../../components/ResearchCard.astro';
+import PublicationCard from '../../components/PublicationCard.astro';
+import Pipeline from '../../components/Pipeline.astro';
+import { getResearch } from '../../lib/content';
+import data from '../../data/research.json';
+import site from '../../data/site.json';
+
+const research = await getResearch();
+const published = research.filter((r) => r.data.statusKind === 'published');
+const ongoing = research.filter((r) => r.data.statusKind === 'ongoing');
+const future = research.filter((r) => r.data.statusKind === 'future');
+---
+<Layout title="Research" description="Research by Darsh: a published paper on machine unlearning, and ongoing research on vision-based robot navigation.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="label reveal">Research</span>
+      <h1 class="reveal">What a model remembers, and where a robot is.</h1>
+      <p class="lead reveal reveal-d1">{data.intro}</p>
+    </div>
+  </section>
+
+  {published.length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <span class="label" style="color:var(--ok)">Published research</span>
+        <div class="split" style="margin-top:2rem">
+          {published.map((r) => <>
+            <ResearchCard href={`/research/${r.id}`} title={r.data.title} status={r.data.status} statusKind={r.data.statusKind} role={r.data.role} description={r.data.description} themes={r.data.themes} />
+            <PublicationCard title={r.data.paperTitle || r.data.title} venue={r.data.venue} url={r.data.paperUrl || site.links.paper} note="Structure: research question · literature review · technical exploration · findings · reflection." />
+          </>)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {ongoing.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <span class="label" style="color:var(--warn)">Ongoing research</span>
+        <div class="grid grid-2" style="margin-top:2rem">
+          {ongoing.map((r) => <ResearchCard href={`/research/${r.id}`} title={r.data.title} status={r.data.status} statusKind={r.data.statusKind} role={r.data.role} description={r.data.description} themes={r.data.themes} />)}
+          <div class="card reveal note">
+            <span class="mono muted">Not yet published</span>
+            <p>Ongoing work is shared here as it develops. Methods and results will be added as the research progresses.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {future.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <span class="label" style="color:var(--purple)">Future ideas</span>
+        <div class="grid grid-2" style="margin-top:2rem">
+          {future.map((r) => <ResearchCard href={`/research/${r.id}`} title={r.data.title} status={r.data.status} statusKind={r.data.statusKind} role={r.data.role} description={r.data.description} themes={r.data.themes} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader label="Trajectory" title={data.timelineTitle} lead="How my technical interests have evolved, one question leading to the next." />
+      <Pipeline steps={data.timeline} />
+    </div>
+  </section>
+</Layout>
+<style>
+  .note { display: flex; flex-direction: column; justify-content: center; border-style: dashed; }
+  .note .mono { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .6rem; }
+</style>
